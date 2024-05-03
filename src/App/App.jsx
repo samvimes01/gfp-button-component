@@ -12,11 +12,41 @@ function App() {
     "destructive",
   ];
   const kinds = [
-    { size: "sm", startIcon: "", endIcon: "", label: "Button CTA" },
-    { size: "lg", startIcon: "Star", endIcon: "", label: "Button CTA" },
-    { size: "xl", startIcon: "", endIcon: "Star", label: "Button CTA" },
-    { size: "xl2", startIcon: "", endIcon: "", label: "Button CTA" },
-    { size: "xl2", startIcon: "Star", endIcon: "", label: "" },
+    {
+      size: "sm",
+      startIcon: "",
+      endIcon: "",
+      label: "Button CTA",
+      ariaLabel: "",
+    },
+    {
+      size: "lg",
+      startIcon: "Star",
+      endIcon: "",
+      label: "Button CTA",
+      ariaLabel: "",
+    },
+    {
+      size: "xl",
+      startIcon: "",
+      endIcon: "Star",
+      label: "Button CTA",
+      ariaLabel: "",
+    },
+    {
+      size: "xl2",
+      startIcon: "",
+      endIcon: "",
+      label: "Button CTA",
+      ariaLabel: "",
+    },
+    {
+      size: "xl2",
+      startIcon: "Star",
+      endIcon: "",
+      label: "",
+      ariaLabel: "star btn",
+    },
   ];
   let linkColor = "";
   let linkHoverColor = "";
@@ -25,7 +55,7 @@ function App() {
     <div className="card">
       {types.map((type, i) => (
         <div className="card__row" key={i}>
-          {kinds.map(({ size, startIcon, endIcon, label }, j) => {
+          {kinds.map((kind, j) => {
             if (type === "link_gray") {
               type = "link";
               linkColor = "#525252";
@@ -33,14 +63,15 @@ function App() {
             }
             return (
               <Button
-                key={type + size + j}
+                key={type + kind.size + j}
                 type={type}
                 linkColor={linkColor}
                 linkHoverColor={linkHoverColor}
-                size={size}
-                startIcon={startIcon}
-                endIcon={endIcon}
-                label={label}
+                size={kind.size}
+                startIcon={kind.startIcon}
+                endIcon={kind.endIcon}
+                label={kind.label}
+                ariaLabel={kind.ariaLabel}
               />
             );
           })}
