@@ -12,11 +12,11 @@ function Button({
   label = "",
   disabled,
   onClick = () => {},
+  href = "",
 }) {
   const ref = useRef(null);
-
   let classList = [type, size];
-  let iconColor = size == "#ffffff";
+
   const isIconBtn = !label && (startIcon || endIcon);
   let iconSize = isIconBtn && size == "xl2" ? 24 : 20;
   if (isIconBtn) {
@@ -32,6 +32,31 @@ function Button({
     }
   }, [linkColor, linkHoverColor]);
 
+  if (type == "link") {
+    return (
+      <a
+        ref={ref}
+        disabled={disabled}
+        className={`button ${classList.join(" ")}`}
+        href={href}
+      >
+        <span className="button__label">
+          {startIcon ? (
+            <Icon name={startIcon} size={iconSize} />
+          ) : (
+            ""
+          )}
+          {label}
+          {endIcon ? (
+            <Icon name={endIcon} size={iconSize} />
+          ) : (
+            ""
+          )}
+        </span>
+      </a>
+    );
+  }
+
   return (
     <button
       ref={ref}
@@ -41,17 +66,9 @@ function Button({
       onClick={onClick}
     >
       <span className="button__label">
-        {startIcon ? (
-          <Icon name={startIcon} size={iconSize} color={iconColor} />
-        ) : (
-          ""
-        )}
+        {startIcon ? <Icon name={startIcon} size={iconSize} /> : ""}
         {label}
-        {endIcon ? (
-          <Icon name={endIcon} size={iconSize} color={iconColor} />
-        ) : (
-          ""
-        )}
+        {endIcon ? <Icon name={endIcon} size={iconSize} /> : ""}
       </span>
     </button>
   );
