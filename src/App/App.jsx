@@ -1,25 +1,53 @@
-import { useState } from 'react'
-import './App.css'
+import Button from "../components/Button/Button";
+
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const types = [
+    "primary",
+    "secondary",
+    "tertiary",
+    "link",
+    "link_gray",
+    "destructive",
+  ];
+  const kinds = [
+    { size: "sm", startIcon: "", endIcon: "", label: "Button CTA" },
+    { size: "lg", startIcon: "Star", endIcon: "", label: "Button CTA" },
+    { size: "xl", startIcon: "", endIcon: "Star", label: "Button CTA" },
+    { size: "xl2", startIcon: "", endIcon: "", label: "Button CTA" },
+    { size: "xl2", startIcon: "Star", endIcon: "", label: "" },
+  ];
+  let linkColor = "";
+  let linkHoverColor = "";
 
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="card">
+      {types.map((type, i) => (
+        <div className="card__row" key={i}>
+          {kinds.map(({ size, startIcon, endIcon, label }, j) => {
+            if (type === "link_gray") {
+              type = "link";
+              linkColor = "#525252";
+              linkHoverColor = "#171717";
+            }
+            return (
+              <Button
+                key={type + size + j}
+                type={type}
+                linkColor={linkColor}
+                linkHoverColor={linkHoverColor}
+                size={size}
+                startIcon={startIcon}
+                endIcon={endIcon}
+                label={label}
+              />
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
 }
 
-export default App
+export default App;
