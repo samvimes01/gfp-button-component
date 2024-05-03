@@ -10,6 +10,7 @@ function Button({
   linkColor,
   linkHoverColor,
   label = "",
+  ariaLabel = "",
   disabled,
   onClick = () => {},
   href = "",
@@ -21,6 +22,9 @@ function Button({
   let iconSize = isIconBtn && size == "xl2" ? 24 : 20;
   if (isIconBtn) {
     classList.push("icon-button");
+  }
+  if (isIconBtn && !ariaLabel) {
+    throw new Error("ariaLabel is required for icon buttons");
   }
 
   useEffect(() => {
@@ -63,6 +67,7 @@ function Button({
       type="button"
       disabled={disabled}
       className={`button ${classList.join(" ")}`}
+      aria-label={ariaLabel ? ariaLabel : label}
       onClick={onClick}
     >
       <span className="button__label">
